@@ -88,6 +88,7 @@ public class ApplicationMgtUtil {
     public static final String MASKING_CHARACTER = "*";
     public static final String MASKING_REGEX = "(?<!^.?).(?!.?$)";
     private static final int MAX_RETRY_ATTEMPTS = 3;
+    private static final String OPENJDK_SCRIPTER_CLASS_NAME = "org.openjdk.nashorn.api.scripting.ScriptObjectMirror";
 
     private static Log log = LogFactory.getLog(ApplicationMgtUtil.class);
 
@@ -969,4 +970,19 @@ public class ApplicationMgtUtil {
         return StringUtils.EMPTY;
     }
 
+    /**
+     * This method is to check Adaptive authentication is availability.
+     *
+     * @return AdaptiveAuthentication Available or not.
+     */
+    public static boolean isAdaptiveAuthenticationAvailable() {
+
+        try {
+            Class.forName(OPENJDK_SCRIPTER_CLASS_NAME);
+            return true;
+        } catch (ClassNotFoundException e) {
+            return false;
+        }
+        
+    }
 }
