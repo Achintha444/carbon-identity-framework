@@ -41,6 +41,7 @@ import org.wso2.carbon.identity.application.common.model.ServiceProvider;
 import org.wso2.carbon.identity.application.common.model.SpFileStream;
 import org.wso2.carbon.identity.application.common.model.User;
 import org.wso2.carbon.identity.application.mgt.dao.ApplicationDAO;
+import org.wso2.carbon.identity.application.mgt.internal.ApplicationManagementServiceComponentHolder;
 import org.wso2.carbon.identity.base.IdentityException;
 import org.wso2.carbon.identity.core.util.IdentityTenantUtil;
 import org.wso2.carbon.identity.core.util.IdentityUtil;
@@ -976,13 +977,18 @@ public class ApplicationMgtUtil {
      * @return AdaptiveAuthentication Available or not.
      */
     public static boolean isAdaptiveAuthenticationAvailable() {
+        return ApplicationManagementServiceComponentHolder.getInstance().isAdaptiveAuthenticationAvailable();
+    }
 
-        try {
-            Class.forName(OPENJDK_SCRIPTER_CLASS_NAME);
-            return true;
-        } catch (ClassNotFoundException e) {
-            return false;
-        }
-        
+
+    /**
+     * Set adaptive authentication availability.
+     *
+     * @param adaptiveAuthenticationAvailable adaptiveAuthenticationAvailable
+     */
+    public static void setAdaptiveAuthenticationAvailable(boolean adaptiveAuthenticationAvailable) {
+
+        ApplicationManagementServiceComponentHolder.getInstance().
+                setAdaptiveAuthenticationAvailable(adaptiveAuthenticationAvailable);
     }
 }

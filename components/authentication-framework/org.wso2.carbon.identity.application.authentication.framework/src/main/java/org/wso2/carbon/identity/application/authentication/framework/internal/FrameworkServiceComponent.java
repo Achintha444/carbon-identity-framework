@@ -95,6 +95,7 @@ import org.wso2.carbon.identity.application.common.model.FederatedAuthenticatorC
 import org.wso2.carbon.identity.application.common.model.LocalAuthenticatorConfig;
 import org.wso2.carbon.identity.application.common.model.Property;
 import org.wso2.carbon.identity.application.common.model.RequestPathAuthenticatorConfig;
+import org.wso2.carbon.identity.application.mgt.ApplicationMgtUtil;
 import org.wso2.carbon.identity.claim.metadata.mgt.ClaimMetadataManagementService;
 import org.wso2.carbon.identity.core.handler.HandlerComparator;
 import org.wso2.carbon.identity.core.util.IdentityCoreInitializedEvent;
@@ -217,12 +218,14 @@ public class FrameworkServiceComponent {
 
         if (checkAdaptiveAuthenticationAvailable()) {
             dataHolder.setAdaptiveAuthenticationAvailable(true);
+            ApplicationMgtUtil.setAdaptiveAuthenticationAvailable(true);
             bundleContext.registerService(JsFunctionRegistry.class, dataHolder.getJsFunctionRegistry(), null);
             JsGraphBuilderFactory jsGraphBuilderFactory = new JsGraphBuilderFactory();
             jsGraphBuilderFactory.init();
             dataHolder.setJsGraphBuilderFactory(jsGraphBuilderFactory);
         } else {
             dataHolder.setAdaptiveAuthenticationAvailable(false);
+            ApplicationMgtUtil.setAdaptiveAuthenticationAvailable(false);
             log.warn("Adaptive authentication is disabled.");
         }
         bundleContext.registerService(UserSessionManagementService.class.getName(),

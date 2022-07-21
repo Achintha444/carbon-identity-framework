@@ -51,6 +51,8 @@ public class ApplicationManagementServiceComponentHolder {
 
     private ClaimMetadataManagementService claimMetadataManagementService;
 
+    private boolean isAdaptiveAuthenticationAvailable = false;
+
     private ApplicationManagementServiceComponentHolder() {
 
     }
@@ -183,5 +185,25 @@ public class ApplicationManagementServiceComponentHolder {
             ClaimMetadataManagementService claimMetadataManagementService) {
 
         this.claimMetadataManagementService = claimMetadataManagementService;
+    }
+
+    /**
+     * Get adaptive authentication available or not.
+     *
+     * @return isAdaptiveAuthenticationAvailable
+     */
+    public boolean isAdaptiveAuthenticationAvailable() {
+
+        return isAdaptiveAuthenticationAvailable;
+    }
+
+    /**
+     * Set adaptive authentication availability.
+     *
+     * @param adaptiveAuthenticationAvailable adaptiveAuthenticationAvailable
+     */
+    public void setAdaptiveAuthenticationAvailable(boolean adaptiveAuthenticationAvailable) {
+
+        isAdaptiveAuthenticationAvailable = adaptiveAuthenticationAvailable;
     }
 }
